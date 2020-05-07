@@ -1,2 +1,2 @@
 # departed
-A library for emulating dependent types in Rust using the "Ghosts of Departed Proofs" technique
+Departed is a library that provides some of the benefits of dependent types in Rust using the "Ghosts of Departed Proofs" technique. Namely, it allows library authors to write APIs with statically checked preconditions and invariants. In addition, it allows users of said APIs to prove that they are using the APIs correctly.
