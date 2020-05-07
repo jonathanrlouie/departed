@@ -1,12 +1,9 @@
-use crate::{
-    named::Named,
-    proof::Proof
-};
+use crate::{named::Named, proof::Proof};
 use std::marker::PhantomData;
 
-pub enum True{}
+pub enum True {}
 
-pub enum False{}
+pub enum False {}
 
 pub struct And<P, Q>(PhantomData<(P, Q)>);
 
@@ -76,7 +73,6 @@ pub fn refl<X>() -> Proof<Equals<X, X>> {
 pub fn axiom<P>() -> Proof<P> {
     Proof(PhantomData)
 }
-
 
 pub fn equals<T: Eq, A, B>(a: Named<T, A>, b: Named<T, B>) -> Option<Proof<Equals<A, B>>> {
     if a.unname() == b.unname() {

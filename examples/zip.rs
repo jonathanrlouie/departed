@@ -1,7 +1,7 @@
 use departed::{
-    named::{Named, NameFn2, unsafe_name, name2},
-    proof::{SuchThat, such_that},
-    logic::{Equals, equals, refl}
+    logic::{equals, refl, Equals},
+    named::{name2, unsafe_name, NameFn2, Named},
+    proof::{such_that, SuchThat},
 };
 use std::marker::PhantomData;
 
@@ -15,9 +15,12 @@ fn length<T, Xs>(xs: &Named<Vec<T>, Xs>) -> Named<usize, Length<Xs>> {
 // This zip function will cause compilation errors if xs and ys are not proven to have the same length
 fn zip<Xs, Ys, N>(
     xs: SuchThat<Named<Vec<u32>, Xs>, Equals<Length<Xs>, N>>,
-    ys: SuchThat<Named<Vec<u32>, Ys>, Equals<Length<Ys>, N>>
+    ys: SuchThat<Named<Vec<u32>, Ys>, Equals<Length<Ys>, N>>,
 ) -> Vec<(u32, u32)> {
-    xs.extract().into_iter().zip(ys.extract().into_iter()).collect()
+    xs.extract()
+        .into_iter()
+        .zip(ys.extract().into_iter())
+        .collect()
 }
 
 struct ZipFn;
@@ -38,8 +41,8 @@ impl NameFn2 for ZipFn {
                 // use refl() to prove that Equals<Length<Ys>, Length<Ys>>
                 let ys_with_prf = such_that(ys, &refl());
                 println!("{:?}", zip(xs_with_prf, ys_with_prf));
-            },
-            None => eprintln!("lengths are not the same!")
+            }
+            None => eprintln!("lengths are not the same!"),
         }
     }
 }

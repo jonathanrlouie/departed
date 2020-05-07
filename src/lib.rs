@@ -1,3 +1,3 @@
-pub mod proof;
-pub mod named;
 pub mod logic;
+pub mod named;
+pub mod proof;
