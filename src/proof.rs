@@ -2,7 +2,7 @@ use crate::named::Named;
 use std::marker::PhantomData;
 
 /// A proof that can be passed to a function to prove that a predicate has been satisfied.
-pub struct Proof<P, T>(pub(crate) PhantomData<(P, T)>);
+pub struct Proof<P>(pub(crate) PhantomData<P>);
 
 /// A value with a proof attached
 pub struct SuchThat<A, P> {
@@ -35,7 +35,7 @@ impl<A, N, P> SuchThat<Named<A, N>, P> {
 }
 
 /// Attaches a proof to a value
-pub fn such_that<A, P, T>(value: A, _proof: &Proof<P, T>) -> SuchThat<A, P> {
+pub fn such_that<A, P>(value: A, _proof: &Proof<P>) -> SuchThat<A, P> {
     SuchThat {
         value,
         _pd: PhantomData,
