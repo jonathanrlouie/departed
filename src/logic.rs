@@ -4,9 +4,9 @@ use crate::{
 };
 use std::marker::PhantomData;
 
-pub struct True(PhantomData<()>);
+pub enum True{}
 
-pub struct False(PhantomData<()>);
+pub enum False{}
 
 pub struct And<P, Q>(PhantomData<(P, Q)>);
 
