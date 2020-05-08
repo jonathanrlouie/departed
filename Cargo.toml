@@ -3,6 +3,12 @@ name = "departed"
 version = "0.1.0"
 authors = ["Jonathan Louie <jonathanrlouie@gmail.com>"]
 edition = "2018"
+description = "A library that provides some of the benefits of dependent types using the Ghosts of Departed Proofs technique"
+exclude = ["examples/*"]
+keywords = ["departed", "gdp", "dependent", "types", "functional", "theorem", "proof"]
+repository = "https://github.com/jonathanrlouie/departed"
+readme = "README.md"
+license = "MIT"
 
 [dependencies]
 
