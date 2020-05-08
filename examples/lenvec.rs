@@ -1,10 +1,8 @@
-use departed::{
-    logic::{equals, refl, Equals},
-    named::{name, NameFn, Named},
-    proof::{such_that, SuchThat},
+use departed::named::{name, NameFn, Named};
+use std::{
+    fmt,
+    std::marker::PhantomData
 };
-use std::fmt;
-use std::marker::PhantomData;
 use text_io::read;
 
 // Type-level numbers; could use typenum crate for this instead
@@ -17,7 +15,7 @@ struct Length<Xs>(PhantomData<Xs>);
 // This is similar to what you can do with const generics, but you can create a LenVec from a vector with a length only known at runtime
 struct LenVec<T, N> {
     items: Vec<T>,
-    _len: PhantomData<N>
+    _len: PhantomData<N>,
 }
 
 impl<T: fmt::Debug, N> fmt::Debug for LenVec<T, N> {
@@ -32,14 +30,14 @@ impl<T, N> LenVec<T, N> {
     fn new() -> LenVec<T, Z> {
         LenVec {
             items: vec![],
-            _len: PhantomData
+            _len: PhantomData,
         }
     }
 
     fn from_vec<Xs>(xs: Named<Vec<T>, Xs>) -> LenVec<T, Length<Xs>> {
         LenVec {
             items: xs.unname(),
-            _len: PhantomData
+            _len: PhantomData,
         }
     }
 
@@ -47,7 +45,7 @@ impl<T, N> LenVec<T, N> {
         self.items.push(item);
         LenVec {
             items: self.items,
-            _len: PhantomData
+            _len: PhantomData,
         }
     }
 }
@@ -55,10 +53,13 @@ impl<T, N> LenVec<T, N> {
 impl<T, N> LenVec<T, S<N>> {
     fn pop(mut self) -> (LenVec<T, N>, T) {
         let item = self.items.pop().unwrap();
-        (LenVec {
-            items: self.items,
-            _len: PhantomData
-        }, item)
+        (
+            LenVec {
+                items: self.items,
+                _len: PhantomData,
+            },
+            item,
+        )
     }
 }
 
