@@ -5,3 +5,6 @@ authors = ["Jonathan Louie <jonathanrlouie@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+
+[dev-dependencies]
+text_io = "0.1.8"
