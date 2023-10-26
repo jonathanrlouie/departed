@@ -21,7 +21,9 @@ impl<A, N> Named<A, N> {
 /// Gives a value a given name
 ///
 /// This should only be used by library authors to export domain specific axioms.
-pub fn unsafe_name<A, N>(value: A) -> Named<A, N> {
+/// Library authors should export only the types and not the constructors for
+/// any defined names.
+pub fn defn<A, N>(value: A, _name: N) -> Named<A, N> {
     Named {
         value,
         name: PhantomData,
@@ -33,20 +35,21 @@ pub trait NameFn {
     type In;
     type Out;
 
-    fn call<N>(self, value0: Named<Self::In, N>) -> Self::Out;
+    fn call<N>(value: Named<Self::In, N>) -> Self::Out;
 }
 
 /// Assigns a type-level name to a value
-pub fn name<F>(value: <F as NameFn>::In, f: F) -> F::Out
+pub fn name<F>(value: <F as NameFn>::In, _f: F) -> F::Out
 where
     F: NameFn,
 {
-    f.call(Named {
+    F::call(Named {
         value,
         name: PhantomData::<()>,
     })
 }
 
+/*
 /// Acts as a function over named values
 pub trait NameFn2 {
     type In1;
@@ -72,3 +75,4 @@ where
         },
     )
 }
+*/

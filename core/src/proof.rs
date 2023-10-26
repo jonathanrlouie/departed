@@ -4,6 +4,9 @@ use std::marker::PhantomData;
 /// A proof that can be passed to a function to prove that a predicate has been satisfied.
 pub struct Proof<P>(pub(crate) PhantomData<P>);
 
+/// Type alias for named values with predicates
+pub type Pred<A, N, P> = SuchThat<Named<A, N>, P>;
+
 /// A value with a proof attached
 pub struct SuchThat<A, P> {
     value: A,

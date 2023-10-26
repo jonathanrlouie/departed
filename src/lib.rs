@@ -1,8 +1,14 @@
-pub mod logic;
-pub mod named;
-pub mod proof;
+pub use departed_macros::*;
+pub use departed_core::*;
 
-#[macro_export]
-macro_rules! gdp {
-    ($v:ty, named $n:ty where $p:ty) => { SuchThat<Named<$v, $n>, $p> };
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn it_works() {
+        #[names]
+        fn blah() {}
+        blah();
+    }
 }
