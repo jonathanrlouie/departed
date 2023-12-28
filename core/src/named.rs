@@ -39,7 +39,7 @@ pub trait NameFn {
 }
 
 /// Assigns a type-level name to a value
-pub fn name<F>(value: <F as NameFn>::In, _f: F) -> F::Out
+pub fn name<F>(value: <F as NameFn>::In, f: F) -> F::Out
 where
     F: NameFn,
 {
@@ -49,30 +49,3 @@ where
     })
 }
 
-/*
-/// Acts as a function over named values
-pub trait NameFn2 {
-    type In1;
-    type In2;
-    type Out;
-
-    fn call<N1, N2>(self, value1: Named<Self::In1, N1>, value2: Named<Self::In2, N2>) -> Self::Out;
-}
-
-/// Assigns a type-level name to a value
-pub fn name2<F>(value1: <F as NameFn2>::In1, value2: <F as NameFn2>::In2, f: F) -> F::Out
-where
-    F: NameFn2,
-{
-    f.call(
-        Named {
-            value: value1,
-            name: PhantomData::<()>,
-        },
-        Named {
-            value: value2,
-            name: PhantomData::<()>,
-        },
-    )
-}
-*/
