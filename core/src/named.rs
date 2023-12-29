@@ -35,7 +35,7 @@ pub trait NameFn {
     type In;
     type Out;
 
-    fn call<N>(value: Named<Self::In, N>) -> Self::Out;
+    fn call<N>(self, value: Named<Self::In, N>) -> Self::Out;
 }
 
 /// Assigns a type-level name to a value
@@ -43,7 +43,7 @@ pub fn name<F>(value: <F as NameFn>::In, f: F) -> F::Out
 where
     F: NameFn,
 {
-    F::call(Named {
+    f.call(Named {
         value,
         name: PhantomData::<()>,
     })
