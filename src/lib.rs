@@ -1,16 +1,8 @@
-pub use departed_core::*;
-pub use departed_macros::*;
+pub mod logic;
+pub mod named;
+pub mod proof;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        name!(1, for<A> |a: Named<u32, A>| -> () { 
-            name!(2, for<B> |b: Named<u32, B>| -> () {
-                
-            })
-        })
-    }
+#[macro_export]
+macro_rules! gdp {
+    ($v:ty, named $n:ty where $p:ty) => { SuchThat<Named<$v, $n>, $p> };
 }
