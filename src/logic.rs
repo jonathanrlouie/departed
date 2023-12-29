@@ -91,7 +91,6 @@ pub fn axiom<P>() -> Proof<P> {
 
 /*
 Example proof
-*/
 fn foo<P, Q>() -> Proof<Implies<Implies<P, Q>, Implies<Not<Q>, Not<P>>>>
 where
     P: Copy + Clone,
@@ -101,3 +100,4 @@ where
         implies_intro(|notq| not_intro(|p| contradicts(implies_elim(p2q, p), notq)))
     })
 }
+*/
