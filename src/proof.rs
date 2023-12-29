@@ -2,6 +2,7 @@ use crate::named::Named;
 use std::marker::PhantomData;
 
 /// A proof that can be passed to a function to prove that a predicate has been satisfied.
+#[derive(Copy, Clone)]
 pub struct Proof<P>(pub(crate) PhantomData<P>);
 
 /// Type alias for named values with predicates
